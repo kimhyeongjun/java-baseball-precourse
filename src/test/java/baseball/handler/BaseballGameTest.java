@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BaseballGameTest {
 
-  private final BaseballGame baseballGame = new BaseballGame();
+  private final BaseballGame baseballGame = new BaseballGame(3);
 
   @Test
   @DisplayName("게임 숫자 생성 테스트")

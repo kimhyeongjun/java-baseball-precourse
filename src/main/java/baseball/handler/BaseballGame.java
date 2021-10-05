@@ -8,17 +8,18 @@ import java.util.List;
 
 public class BaseballGame {
 
-  private final static int COUNT = 3;
   private final List<Integer> randomNumbers;
   private final GameResult gameResult;
+  private final int NUMBER_DIGIT;
 
-  public BaseballGame() {
+  public BaseballGame(int digit) {
+    this.NUMBER_DIGIT = digit;
     this.gameResult = GameResult.builder().build();
-    this.randomNumbers = new ArrayList<>(COUNT);
+    this.randomNumbers = new ArrayList<>(NUMBER_DIGIT);
   }
 
   public void createNumbers() {
-    for (int i = 0; i < COUNT; i++) {
+    for (int i = 0; i < NUMBER_DIGIT; i++) {
       randomNumbers.add(i, getNumber());
     }
   }
