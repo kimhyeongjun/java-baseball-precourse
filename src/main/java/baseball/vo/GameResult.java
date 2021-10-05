@@ -22,7 +22,7 @@ public class GameResult {
     return strikeCount;
   }
 
-  public boolean isAllStrike() {
+  public boolean isEnd() {
     return strikeCount + ballCount == GameController.GAME_COUNT;
   }
 
