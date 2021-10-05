@@ -20,7 +20,6 @@ public class BaseballGame {
   public void init() {
     this.randomNumbers = new ArrayList<>(NUMBER_DIGIT);
     createNumbers();
-    System.out.println(randomNumbers);
   }
 
   private void createNumbers() {
@@ -59,12 +58,12 @@ public class BaseballGame {
     return randomNumbers.contains(num) ? getNumber() : num;
   }
 
-//  public boolean isRunning() {
-//    if (gameResult == null) {
-//      return Boolean.FALSE;
-//    }
-//
-//    return !gameResult.isAllStrike();
-//  }
+  public boolean isRunning() {
+    if (gameResult == null) {
+      return Boolean.FALSE;
+    }
+
+    return !gameResult.isAllStrike();
+  }
 
 }
