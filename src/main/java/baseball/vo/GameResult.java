@@ -1,10 +1,11 @@
 package baseball.vo;
 
+import baseball.controller.GameController;
+
 public class GameResult {
 
   private int strikeCount;
   private int ballCount;
-
   public void increaseStrikeCount() {
     strikeCount++;
   }
@@ -19,6 +20,31 @@ public class GameResult {
 
   public int getStrikeCount() {
     return strikeCount;
+  }
+
+  public boolean isAllStrike() {
+    return strikeCount + ballCount == GameController.GAME_COUNT;
+  }
+
+  public String getHint() {
+    StringBuilder resultMessage = new StringBuilder();
+    if (strikeCount > 0) {
+      createHint(strikeCount, resultMessage);
+      resultMessage.append("스트라이크");
+    }
+    if (ballCount > 0) {
+      createHint(ballCount, resultMessage);
+      resultMessage.append("볼");
+    }
+    return resultMessage.toString();
+  }
+
+  private void createHint(int count, StringBuilder message) {
+    if (message.length() > 0) {
+      message.append(" ");
+    }
+
+    message.append(count);
   }
 
   public static GameResultBuilder builder() {

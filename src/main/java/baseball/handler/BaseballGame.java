@@ -8,23 +8,30 @@ import java.util.List;
 
 public class BaseballGame {
 
-  private final List<Integer> randomNumbers;
-  private final GameResult gameResult;
+  private List<Integer> randomNumbers;
+  private GameResult gameResult;
   private final int NUMBER_DIGIT;
+  private boolean running = Boolean.FALSE;
 
   public BaseballGame(int digit) {
     this.NUMBER_DIGIT = digit;
-    this.gameResult = GameResult.builder().build();
-    this.randomNumbers = new ArrayList<>(NUMBER_DIGIT);
   }
 
-  public void createNumbers() {
+  public void init() {
+    this.randomNumbers = new ArrayList<>(NUMBER_DIGIT);
+    createNumbers();
+    System.out.println(randomNumbers);
+  }
+
+  private void createNumbers() {
     for (int i = 0; i < NUMBER_DIGIT; i++) {
       randomNumbers.add(i, getNumber());
     }
   }
 
   public GameResult doStart(int[] inputNums) {
+    gameResult = GameResult.builder().build();
+
     for (int i = 0; i < inputNums.length; i++) {
       int num = randomNumbers.get(i);
       int inputNum = inputNums[i];
@@ -51,5 +58,13 @@ public class BaseballGame {
 
     return randomNumbers.contains(num) ? getNumber() : num;
   }
+
+//  public boolean isRunning() {
+//    if (gameResult == null) {
+//      return Boolean.FALSE;
+//    }
+//
+//    return !gameResult.isAllStrike();
+//  }
 
 }

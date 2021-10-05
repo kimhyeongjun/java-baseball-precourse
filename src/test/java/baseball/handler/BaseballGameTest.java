@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,16 +25,18 @@ class BaseballGameTest {
   private final BaseballGame baseballGame = new BaseballGame(3);
 
   @Test
-  @DisplayName("게임 숫자 생성 테스트")
-  void createNumbers() throws IllegalAccessException, NoSuchFieldException {
-    baseballGame.createNumbers();
+  @DisplayName("야구 게심 숫자 초기화 기능 테스트")
+  void init() throws IllegalAccessException, NoSuchFieldException {
     Field field = baseballGame.getClass().getDeclaredField("randomNumbers");
     field.setAccessible(Boolean.TRUE);
+    List<Integer> preNums = (List<Integer>) field.get(baseballGame);
+    baseballGame.init();
 
     List<Integer> nums = (List<Integer>) field.get(baseballGame);
     Set<Integer> set = new HashSet<>(nums);
 
     assertAll(
+      () -> assertNull(preNums),
       () -> assertEquals(3, nums.size()),
       () -> assertEquals(nums.size(), set.size())
     );
