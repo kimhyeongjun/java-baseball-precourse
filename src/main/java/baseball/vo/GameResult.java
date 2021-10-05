@@ -13,12 +13,12 @@ public class GameResult {
     ballCount++;
   }
 
-  public void setStrikeCount(int strikeCount) {
-    this.strikeCount = strikeCount;
+  public int getBallCount() {
+    return ballCount;
   }
 
-  public void setBallCount(int ballCount) {
-    this.ballCount = ballCount;
+  public int getStrikeCount() {
+    return strikeCount;
   }
 
   public static GameResultBuilder builder() {
@@ -35,12 +35,12 @@ public class GameResult {
 
 
     public GameResultBuilder strikeCount(int strikeCount) {
-      gameResult.setStrikeCount(strikeCount);
+      gameResult.strikeCount = strikeCount;
       return this;
     }
 
     public GameResultBuilder ballCount(int ballCount) {
-      gameResult.setBallCount(ballCount);
+      gameResult.ballCount = ballCount;
       return this;
     }
 

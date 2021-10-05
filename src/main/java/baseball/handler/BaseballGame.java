@@ -23,6 +23,28 @@ public class BaseballGame {
     }
   }
 
+  public GameResult doStart(int[] inputNums) {
+    for (int i = 0; i < inputNums.length; i++) {
+      int num = randomNumbers.get(i);
+      int inputNum = inputNums[i];
+
+      doCounting(num, inputNum);
+    }
+
+    return gameResult;
+  }
+
+  private void doCounting(int num, int inputNum) {
+    if (num == inputNum) {
+      gameResult.increaseStrikeCount();
+      return;
+    }
+
+    if (randomNumbers.contains(inputNum)) {
+      gameResult.increaseBallCount();
+    }
+  }
+
   private int getNumber() {
     int num = Randoms.pickNumberInRange(1, 9);
 
