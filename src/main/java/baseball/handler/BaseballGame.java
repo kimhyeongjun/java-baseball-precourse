@@ -18,7 +18,10 @@ public class BaseballGame {
   }
 
   public void init() {
-    this.randomNumbers = new ArrayList<>(NUMBER_DIGIT);
+    if (randomNumbers != null) {
+      randomNumbers.clear();
+    }
+    randomNumbers = new ArrayList<>(NUMBER_DIGIT);
     createNumbers();
   }
 
@@ -56,14 +59,6 @@ public class BaseballGame {
     int num = Randoms.pickNumberInRange(1, 9);
 
     return randomNumbers.contains(num) ? getNumber() : num;
-  }
-
-  public boolean isRunning() {
-    if (gameResult == null) {
-      return Boolean.FALSE;
-    }
-
-    return !gameResult.isAllStrike();
   }
 
 }
