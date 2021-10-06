@@ -1,13 +1,15 @@
 package baseball.view;
 
 import baseball.controller.GameController;
-import baseball.core.Event;
+import baseball.core.EventHandler;
 import baseball.core.EventListener;
+import baseball.core.Event;
 import baseball.enums.EventId;
 import baseball.enums.GameStatus;
 import baseball.util.Printer;
 import baseball.util.Validator;
 import baseball.vo.EventMessage;
+import baseball.vo.GameBoard;
 import nextstep.utils.Console;
 
 import static baseball.enums.GameStatus.*;
@@ -26,7 +28,20 @@ public class GameViewer extends EventListener {
     GameStatus gameStatus = message.getGameStatus();
     if (START == gameStatus) {
       playGame(gameStatus);
+      return;
     }
+    doNextStep(gameStatus, (GameBoard) message.getBody());
+  }
+
+  private void doNextStep(GameStatus gameStatus, GameBoard gameBoard) {
+    if (RUNNING == gameStatus) {
+      replayGame(gameBoard);
+    }
+  }
+
+  private void replayGame(GameBoard gameBoard) {
+    Printer.println(gameBoard.getHint());
+    playGame(RUNNING);
   }
 
   private void playGame(GameStatus gameStatus) {
