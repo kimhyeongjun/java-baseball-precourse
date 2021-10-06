@@ -36,6 +36,10 @@ public class GameViewer extends EventListener {
   private void doNextStep(GameStatus gameStatus, GameBoard gameBoard) {
     if (RUNNING == gameStatus) {
       replayGame(gameBoard);
+      return;
+    }
+    if (END == gameStatus) {
+      doEndGame(gameBoard);
     }
   }
 
@@ -58,6 +62,41 @@ public class GameViewer extends EventListener {
   private String requestInput() {
     Printer.print("숫자를 입력해주세요. : ");
     return Console.readLine();
+  }
+
+  private void doEndGame(GameBoard gameBoard) {
+    Printer.println(gameBoard.getHint());
+    GameStatus gameStatus = checkEndGame(gameBoard.isEnd());
+    if (gameStatus == null) {
+      throw new IllegalStateException("Unexpected value");
+    }
+    if (START == gameStatus) {
+      playGame(gameStatus);
+    }
+    if (END == gameStatus) {
+      callEndProcess();
+    }
+  }
+
+  private void callEndProcess() {
+    event.send(EventMessage.builder().gameStatus(GameStatus.END).build());
+    EventHandler.removeListener(this);
+    Printer.println("게임을 종료합니다.");
+  }
+
+  private GameStatus checkEndGame(boolean isEnd) {
+    if (isEnd) {
+      Printer.println("3개의 숫자를 모두 맞히셨습니다! 게임 끝");
+      return GameStatus.of(askRestartGame());
+    }
+
+    return GameStatus.RUNNING;
+  }
+
+  private int askRestartGame() {
+    Printer.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+    String commend = Console.readLine();
+    return Integer.parseInt(commend);
   }
 
 }

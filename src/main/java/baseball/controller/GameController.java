@@ -29,6 +29,10 @@ public class GameController extends EventListener {
   @Override
   public void onEvent(EventMessage message) {
     GameStatus gameStatus = message.getGameStatus();
+    if (END == gameStatus) {
+      endGame();
+      return;
+    }
     startGame(gameStatus, message.getBody().toString());
   }
 
@@ -38,6 +42,10 @@ public class GameController extends EventListener {
     }
 
     playGame(baseBall);
+  }
+
+  private void endGame() {
+    EventHandler.removeListener(this);
   }
 
   private void playGame(final String baseBall) {
