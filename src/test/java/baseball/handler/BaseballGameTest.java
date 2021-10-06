@@ -25,32 +25,14 @@ class BaseballGameTest {
   @BeforeEach
   void setUp() {
     gameBoard = new GameBoard();
-    baseballGame = new BaseballGame(3, gameBoard);
-  }
-
-  @Test
-  @DisplayName("야구 게임 숫자 초기화 기능 테스트")
-  void init() throws IllegalAccessException, NoSuchFieldException {
-    Field field = baseballGame.getClass().getDeclaredField("randomNumbers");
-    field.setAccessible(Boolean.TRUE);
-    List<Integer> preNums = (List<Integer>) field.get(baseballGame);
-    baseballGame.init();
-
-    List<Integer> nums = (List<Integer>) field.get(baseballGame);
-    Set<Integer> set = new HashSet<>(nums);
-
-    assertAll(
-      () -> assertNull(preNums),
-      () -> assertEquals(3, nums.size()),
-      () -> assertEquals(nums.size(), set.size())
-    );
+    baseballGame = new BaseballGame(gameBoard);
   }
 
   @ParameterizedTest
   @DisplayName("입력 된 데이터별 테스트")
   @MethodSource("generateData")
   void doStart(int[] inputNums, int[] expectArr) throws NoSuchFieldException, IllegalAccessException {
-    Field field = baseballGame.getClass().getDeclaredField("randomNumbers");
+    Field field = baseballGame.getClass().getDeclaredField("baseBalls");
     field.setAccessible(Boolean.TRUE);
 
     List<Integer> randomNumbers = Arrays.asList(7, 8, 9);

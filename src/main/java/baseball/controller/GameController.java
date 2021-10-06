@@ -23,7 +23,7 @@ public class GameController extends EventListener {
     super(EventListenerId.GAME_CONTROLLER);
     this.event = new Event(EventListenerId.GAME_VIEWER);
     this.gameBoard = new GameBoard();
-    this.baseballGame = new BaseballGame(BALL_COUNT, gameBoard);
+    this.baseballGame = new BaseballGame(gameBoard);
   }
 
   @Override
