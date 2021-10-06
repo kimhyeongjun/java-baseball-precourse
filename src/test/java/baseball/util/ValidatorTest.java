@@ -4,6 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ValidatorTest {
@@ -15,4 +18,12 @@ class ValidatorTest {
     assertEquals(Boolean.parseBoolean(result), Validator.checkInput(str));
   }
 
+  @ParameterizedTest
+  @DisplayName("중복 체크 테스트.")
+  @CsvSource(value = {"1:true", "2:false"}, delimiter = ':')
+  void validateDuplicateList(int num, String expectResult) {
+    List<Integer> nums = Arrays.asList(1,3,4);
+    assertEquals(Boolean.valueOf(expectResult), nums.contains(num));
+
+  }
 }
