@@ -26,11 +26,19 @@ public final class EventHandler {
     }
     
     EventListener eventListener = getEventListener(0, id);
+    if (eventListener == null) {
+      throw new RuntimeException("Not matched EventListener.");
+    }
     eventListener.onEvent(message);
   }
 
   private static EventListener getEventListener(int index, EventId id) {
+    if (index >= eventListeners.size()) {
+      return null;
+    }
+
     EventListener eventListener = eventListeners.get(index);
+
     if (eventListener.getId() == id) {
       return eventListener;
     }
