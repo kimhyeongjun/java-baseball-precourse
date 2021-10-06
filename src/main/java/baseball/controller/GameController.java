@@ -3,7 +3,7 @@ package baseball.controller;
 import baseball.core.Event;
 import baseball.core.EventHandler;
 import baseball.core.EventListener;
-import baseball.enums.EventId;
+import baseball.enums.EventListenerId;
 import baseball.enums.GameStatus;
 import baseball.handler.BaseballGame;
 import baseball.util.Converter;
@@ -20,8 +20,8 @@ public class GameController extends EventListener {
   private final Event event;
 
   public GameController() {
-    super(EventId.GAME_CONTROLLER);
-    this.event = new Event(EventId.GAME_VIEWER);
+    super(EventListenerId.GAME_CONTROLLER);
+    this.event = new Event(EventListenerId.GAME_VIEWER);
     this.gameBoard = new GameBoard();
     this.baseballGame = new BaseballGame(BALL_COUNT, gameBoard);
   }

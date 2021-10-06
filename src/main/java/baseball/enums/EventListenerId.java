@@ -1,6 +1,6 @@
 package baseball.enums;
 
-public enum EventId {
+public enum EventListenerId {
 
   GAME_CONTROLLER,
   GAME_VIEWER

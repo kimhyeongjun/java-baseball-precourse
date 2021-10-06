@@ -1,19 +1,19 @@
 package baseball.core;
 
-import baseball.enums.EventId;
+import baseball.enums.EventListenerId;
 import baseball.vo.EventMessage;
 
 public abstract class EventListener {
 
-  private EventId id;
+  private EventListenerId id;
 
-  public EventListener(EventId id) {
+  public EventListener(EventListenerId id) {
     this.id = id;
   }
 
   abstract public void onEvent(EventMessage message);
 
-  public EventId getId() {
+  public EventListenerId getId() {
     return id;
   }
 

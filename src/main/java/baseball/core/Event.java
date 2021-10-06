@@ -1,13 +1,13 @@
 package baseball.core;
 
-import baseball.enums.EventId;
+import baseball.enums.EventListenerId;
 import baseball.vo.EventMessage;
 
 public class Event {
 
-  private final EventId targetId;
+  private final EventListenerId targetId;
 
-  public Event(EventId targetId) {
+  public Event(EventListenerId targetId) {
     this.targetId = targetId;
   }
 

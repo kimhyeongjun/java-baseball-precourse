@@ -1,6 +1,6 @@
 package baseball.core;
 
-import baseball.enums.EventId;
+import baseball.enums.EventListenerId;
 import baseball.vo.EventMessage;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public final class EventHandler {
     eventListeners.remove(eventListener);
   }
   
-  public static void callEvent(final EventId id, final EventMessage message) {
+  public static void callEvent(final EventListenerId id, final EventMessage message) {
     checkEventListeners();
     EventListener eventListener = getEventListener(0, id);
     eventListener.onEvent(message);
@@ -32,7 +32,7 @@ public final class EventHandler {
     }
   }
 
-  private static EventListener getEventListener(int index, EventId id) {
+  private static EventListener getEventListener(int index, EventListenerId id) {
     if (index >= eventListeners.size()) {
       throw new RuntimeException("Not matched EventListener.");
     }

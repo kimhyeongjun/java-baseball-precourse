@@ -4,7 +4,7 @@ import baseball.controller.GameController;
 import baseball.core.EventHandler;
 import baseball.core.EventListener;
 import baseball.core.Event;
-import baseball.enums.EventId;
+import baseball.enums.EventListenerId;
 import baseball.enums.GameStatus;
 import baseball.util.Printer;
 import baseball.util.Validator;
@@ -19,8 +19,8 @@ public class GameViewer extends EventListener {
   private final Event event;
 
   public GameViewer() {
-    super(EventId.GAME_VIEWER);
-    this.event = new Event(EventId.GAME_CONTROLLER);
+    super(EventListenerId.GAME_VIEWER);
+    this.event = new Event(EventListenerId.GAME_CONTROLLER);
   }
 
   @Override
