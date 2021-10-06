@@ -34,18 +34,14 @@ public class GameViewer extends EventListener {
   }
 
   private void doNextStep(GameStatus gameStatus, GameBoard gameBoard) {
+    Printer.println(gameBoard.getHint());
     if (RUNNING == gameStatus) {
-      replayGame(gameBoard);
+      playGame(gameStatus);
       return;
     }
     if (END == gameStatus) {
       doEndGame(gameBoard);
     }
-  }
-
-  private void replayGame(GameBoard gameBoard) {
-    Printer.println(gameBoard.getHint());
-    playGame(RUNNING);
   }
 
   private void playGame(GameStatus gameStatus) {
@@ -65,7 +61,6 @@ public class GameViewer extends EventListener {
   }
 
   private void doEndGame(GameBoard gameBoard) {
-    Printer.println(gameBoard.getHint());
     GameStatus gameStatus = checkEndGame(gameBoard.isEnd());
     if (gameStatus == null) {
       throw new IllegalStateException("Unexpected value");
