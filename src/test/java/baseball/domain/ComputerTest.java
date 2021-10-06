@@ -1,4 +1,4 @@
-package baseball.handler;
+package baseball.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

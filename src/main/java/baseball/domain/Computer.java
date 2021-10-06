@@ -1,4 +1,4 @@
-package baseball.handler;
+package baseball.domain;
 
 import baseball.util.Validator;
 import nextstep.utils.Randoms;

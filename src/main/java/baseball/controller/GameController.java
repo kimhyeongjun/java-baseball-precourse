@@ -5,7 +5,7 @@ import baseball.core.EventHandler;
 import baseball.core.EventListener;
 import baseball.enums.EventListenerId;
 import baseball.enums.GameStatus;
-import baseball.handler.BaseballGame;
+import baseball.domain.BaseballGame;
 import baseball.util.Converter;
 import baseball.vo.EventMessage;
 import baseball.vo.GameBoard;
