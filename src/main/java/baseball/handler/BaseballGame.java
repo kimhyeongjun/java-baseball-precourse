@@ -29,7 +29,7 @@ public class BaseballGame {
 
   private void createBaseBalls() {
     for (int i = 0; i < BALL_COUNT; i++) {
-      baseBalls.add(i, getNumber());
+      baseBalls.add(i, getBall());
     }
   }
 
@@ -53,10 +53,10 @@ public class BaseballGame {
     }
   }
 
-  private int getNumber() {
+  private int getBall() {
     int num = Randoms.pickNumberInRange(1, 9);
 
-    return Validator.validateDuplicateList(num, baseBalls) ? getNumber() : num;
+    return Validator.validateDuplicateList(num, baseBalls) ? getBall() : num;
   }
 
 }
