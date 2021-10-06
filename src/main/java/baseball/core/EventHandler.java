@@ -21,20 +21,20 @@ public final class EventHandler {
   }
   
   public static void callEvent(final EventId id, final EventMessage message) {
+    checkEventListeners();
+    EventListener eventListener = getEventListener(0, id);
+    eventListener.onEvent(message);
+  }
+
+  private static void checkEventListeners() {
     if (eventListeners.isEmpty()) {
       throw new RuntimeException("Not exists EventListener.");
     }
-    
-    EventListener eventListener = getEventListener(0, id);
-    if (eventListener == null) {
-      throw new RuntimeException("Not matched EventListener.");
-    }
-    eventListener.onEvent(message);
   }
 
   private static EventListener getEventListener(int index, EventId id) {
     if (index >= eventListeners.size()) {
-      return null;
+      throw new RuntimeException("Not matched EventListener.");
     }
 
     EventListener eventListener = eventListeners.get(index);
