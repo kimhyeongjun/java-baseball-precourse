@@ -1,6 +1,7 @@
 package baseball.handler;
 
-import baseball.vo.GameResult;
+import baseball.util.Validator;
+import baseball.vo.GameBoard;
 import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
@@ -8,57 +9,54 @@ import java.util.List;
 
 public class BaseballGame {
 
-  private List<Integer> randomNumbers;
-  private GameResult gameResult;
-  private final int NUMBER_DIGIT;
-  private boolean running = Boolean.FALSE;
+  private List<Integer> baseBalls;
+  private GameBoard gameBoard;
+  private final int BALL_COUNT;
 
-  public BaseballGame(int digit) {
-    this.NUMBER_DIGIT = digit;
+  public BaseballGame(int ballCount, GameBoard gameBoard) {
+    this.gameBoard = gameBoard;
+    this.BALL_COUNT = ballCount;
   }
 
   public void init() {
-    if (randomNumbers != null) {
-      randomNumbers.clear();
-    }
-    randomNumbers = new ArrayList<>(NUMBER_DIGIT);
-    createNumbers();
-  }
-
-  private void createNumbers() {
-    for (int i = 0; i < NUMBER_DIGIT; i++) {
-      randomNumbers.add(i, getNumber());
-    }
-  }
-
-  public GameResult doStart(int[] inputNums) {
-    gameResult = GameResult.builder().build();
-
-    for (int i = 0; i < inputNums.length; i++) {
-      int num = randomNumbers.get(i);
-      int inputNum = inputNums[i];
-
-      doCounting(num, inputNum);
+    if (baseBalls != null) {
+      baseBalls.clear();
     }
 
-    return gameResult;
+    baseBalls = new ArrayList<>(BALL_COUNT);
+    createBaseBalls();
   }
 
-  private void doCounting(int num, int inputNum) {
+  private void createBaseBalls() {
+    for (int i = 0; i < BALL_COUNT; i++) {
+      baseBalls.add(i, getNumber());
+    }
+  }
+
+  public void doStart(final int[] inputBalls) {
+    for (int i = 0; i < inputBalls.length; i++) {
+      int ball = baseBalls.get(i);
+      int inputBall = inputBalls[i];
+
+      doCounting(ball, inputBall);
+    }
+  }
+
+  private void doCounting(final int num, final int inputNum) {
     if (num == inputNum) {
-      gameResult.increaseStrikeCount();
+      gameBoard.increaseStrikeCount();
       return;
     }
 
-    if (randomNumbers.contains(inputNum)) {
-      gameResult.increaseBallCount();
+    if (baseBalls.contains(inputNum)) {
+      gameBoard.increaseBallCount();
     }
   }
 
   private int getNumber() {
     int num = Randoms.pickNumberInRange(1, 9);
 
-    return randomNumbers.contains(num) ? getNumber() : num;
+    return Validator.validateDuplicateList(num, baseBalls) ? getNumber() : num;
   }
 
 }

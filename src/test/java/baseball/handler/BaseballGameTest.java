@@ -1,17 +1,14 @@
 package baseball.handler;
 
-import baseball.vo.GameResult;
+import baseball.vo.GameBoard;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -22,10 +19,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BaseballGameTest {
 
-  private final BaseballGame baseballGame = new BaseballGame(3);
+  private GameBoard gameBoard;
+  private BaseballGame baseballGame;
+
+  @BeforeEach
+  void setUp() {
+    gameBoard = new GameBoard();
+    baseballGame = new BaseballGame(3, gameBoard);
+  }
 
   @Test
-  @DisplayName("야구 게심 숫자 초기화 기능 테스트")
+  @DisplayName("야구 게임 숫자 초기화 기능 테스트")
   void init() throws IllegalAccessException, NoSuchFieldException {
     Field field = baseballGame.getClass().getDeclaredField("randomNumbers");
     field.setAccessible(Boolean.TRUE);
@@ -53,16 +57,16 @@ class BaseballGameTest {
 
     field.set(baseballGame, randomNumbers);
 
-    GameResult gameResult = baseballGame.doStart(inputNums);
-    GameResult expectResult =
-      GameResult.builder()
+    baseballGame.doStart(inputNums);
+    GameBoard expectResult =
+      GameBoard.builder()
         .strikeCount(expectArr[0])
         .ballCount(expectArr[1])
         .build();
 
     assertAll(
-      () -> assertEquals(expectResult.getStrikeCount(), gameResult.getStrikeCount()),
-      () -> assertEquals(expectResult.getBallCount(), gameResult.getBallCount())
+      () -> assertEquals(expectResult.getStrikeCount(), gameBoard.getStrikeCount()),
+      () -> assertEquals(expectResult.getBallCount(), gameBoard.getBallCount())
     );
   }
 

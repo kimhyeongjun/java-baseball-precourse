@@ -2,10 +2,16 @@ package baseball.vo;
 
 import baseball.controller.GameController;
 
-public class GameResult {
+public class GameBoard {
 
   private int strikeCount;
   private int ballCount;
+
+  public void init() {
+    this.ballCount = 0;
+    this.strikeCount = 0;
+  }
+
   public void increaseStrikeCount() {
     strikeCount++;
   }
@@ -23,7 +29,7 @@ public class GameResult {
   }
 
   public boolean isEnd() {
-    return strikeCount + ballCount == GameController.GAME_COUNT;
+    return strikeCount + ballCount == GameController.BALL_COUNT;
   }
 
   public String getHint() {
@@ -48,31 +54,31 @@ public class GameResult {
     message.append(count).append(hint);
   }
 
-  public static GameResultBuilder builder() {
-    return new GameResultBuilder(new GameResult());
+  public static GameBoardBuilder builder() {
+    return new GameBoardBuilder(new GameBoard());
   }
 
-  public static class GameResultBuilder {
+  public static class GameBoardBuilder {
 
-    private final GameResult gameResult;
+    private final GameBoard gameBoard;
 
-    public GameResultBuilder(GameResult gameResult) {
-      this.gameResult = gameResult;
+    public GameBoardBuilder(GameBoard gameBoard) {
+      this.gameBoard = gameBoard;
     }
 
 
-    public GameResultBuilder strikeCount(int strikeCount) {
-      gameResult.strikeCount = strikeCount;
+    public GameBoardBuilder strikeCount(int strikeCount) {
+      gameBoard.strikeCount = strikeCount;
       return this;
     }
 
-    public GameResultBuilder ballCount(int ballCount) {
-      gameResult.ballCount = ballCount;
+    public GameBoardBuilder ballCount(int ballCount) {
+      gameBoard.ballCount = ballCount;
       return this;
     }
 
-    public GameResult build() {
-      return gameResult;
+    public GameBoard build() {
+      return gameBoard;
     }
   }
 }
