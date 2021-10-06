@@ -2,9 +2,9 @@ package baseball.enums;
 
 public enum GameStatus {
   START(1),
-  END(2),
-  RUNNING(3)
-  ;
+  RUNNING(3),
+  COMPLETE(4),
+  END(2);
 
   private int status;
 

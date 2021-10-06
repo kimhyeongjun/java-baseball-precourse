@@ -28,7 +28,7 @@ public class GameBoard {
     return strikeCount;
   }
 
-  public boolean isEnd() {
+  public boolean isComplete() {
     return strikeCount + ballCount == GameController.BALL_COUNT;
   }
 

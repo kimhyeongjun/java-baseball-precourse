@@ -30,7 +30,7 @@ public class GameController extends EventListener {
   public void onEvent(EventMessage message) {
     GameStatus gameStatus = message.getGameStatus();
     if (END == gameStatus) {
-      endGame();
+      stopGame();
       return;
     }
     startGame(gameStatus, message.getBody().toString());
@@ -44,14 +44,14 @@ public class GameController extends EventListener {
     playGame(baseBall);
   }
 
-  private void endGame() {
+  private void stopGame() {
     EventHandler.removeListener(this);
   }
 
   private void playGame(final String baseBall) {
     gameBoard.init();
     baseballGame.doStart(Converter.convertStringToIntArr(baseBall));
-    GameStatus gameStatus = gameBoard.isEnd() ? END : RUNNING;
+    GameStatus gameStatus = gameBoard.isComplete() ? COMPLETE : RUNNING;
 
     event.send(EventMessage.builder().gameStatus(gameStatus).body(gameBoard).build());
   }
